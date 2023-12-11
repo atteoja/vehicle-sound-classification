@@ -41,6 +41,7 @@ def load_data(path, sampling_rate=44100):
 
     return vehicles, labels
 
+'''
 train_X, train_Y = load_data('wavfiles')
 print(train_X.shape)
 print(train_Y.shape)
@@ -50,3 +51,4 @@ for i in range(5):
     print(train_Y[i])
     sd.play(train_X[i], 44100)
     sd.wait()
+'''
