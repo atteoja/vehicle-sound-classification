@@ -15,16 +15,17 @@ from keras import backend as K
 
 # load all .wav files and get their dft
 train_X, train_Y = load_data('training_data')
-
-print(train_X.shape)
-print(train_Y.shape)
+test_X, test_Y = load_data('testing_data')
 
 # normalize the data
 train_X = train_X / np.max(train_X)
+test_X = test_X / np.max(test_X)
 
 train_X = np.abs(np.fft.fft(train_X))
+test_X = np.abs(np.fft.fft(test_X))
 
 train_X = train_X.reshape(train_X.shape[0], train_X.shape[1], 1)
+test_X = test_X.reshape(test_X.shape[0], test_X.shape[1], 1)
 
 val_X = train_X[int(0.8 * train_X.shape[0]):]
 val_Y = train_Y[int(0.8 * train_Y.shape[0]):]
@@ -45,4 +46,11 @@ model = tf.keras.models.Sequential([
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-history = model.fit(train_X, train_Y, epochs=5, validation_data=(val_X, val_Y))
+model.fit(train_X, train_Y, epochs=5, validation_data=(val_X, val_Y))
+
+print('Testing...')
+
+test = model.evaluate(test_X, test_Y)
+
+print('Test loss: ', test[0])
+print('Test accuracy: ', test[1])
