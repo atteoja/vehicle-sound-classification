@@ -19,11 +19,11 @@ def load_data(path, sampling_rate=44100):
                 sound, _ = lb.load(os.path.join(path, file), sr=sampling_rate)
 
                 # if sound is shorter than 5 seconds, pad with zeros
-                if len(sound) < 5*sampling_rate:
+                if len(sound) < 5 * sampling_rate:
                     sound = np.pad(sound, (0, 5*sampling_rate - len(sound)), 'constant')
 
                 # take first 5 seconds of the sound
-                sound = sound[:5*sampling_rate]
+                sound = sound[:5 * sampling_rate]
 
                 if file.startswith('auto'):
                     vehicles = np.vstack((vehicles, sound))
