@@ -1,2 +1,5 @@
 # vehicle-sound-classification
-Binary classification project to detect trams and cars. Part of audio processing course.
+
+Binary classification project to detect trams and cars. Part of the audio processing course.
+
+The classification was implemented with a convolutional neural network, that predicts the vehicle based on its MFCC image.
